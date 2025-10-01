@@ -1,342 +1,326 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2685.1">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Team Time Zone Overlap</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-<p class="p1">&lt;!DOCTYPE html&gt;</p>
-<p class="p1">&lt;html lang="en"&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Global Team Time Zone Overlap&lt;/title&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"&gt;&lt;/script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"&gt;&lt;/script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://unpkg.com/@babel/standalone/babel.min.js"&gt;&lt;/script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p1">&lt;body&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="root"&gt;&lt;/div&gt;</p>
-<p class="p2"><span class="Apple-converted-space">    </span></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;script type="text/babel"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const { useState, useEffect } = React;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>const TimeZoneOverlapVisualizer = () =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">          </span>const [currentTime, setCurrentTime] = useState(new Date());</p>
-<p class="p1"><span class="Apple-converted-space">          </span>const [selectedHour, setSelectedHour] = useState(null);</p>
-<p class="p1"><span class="Apple-converted-space">          </span>const [userTimeZone, setUserTimeZone] = useState('');</p>
-<p class="p1"><span class="Apple-converted-space">          </span>const [userLocalTime, setUserLocalTime] = useState('');</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">          </span>useEffect(() =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const timer = setInterval(() =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">              </span>const now = new Date();</p>
-<p class="p1"><span class="Apple-converted-space">              </span>setCurrentTime(now);</p>
-<p class="p1"><span class="Apple-converted-space">              </span>setUserLocalTime(now.toLocaleTimeString('en-US', {<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                </span>hour: '2-digit',<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                </span>minute: '2-digit',</p>
-<p class="p1"><span class="Apple-converted-space">                </span>hour12: false<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">              </span>}));</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}, 1000);</p>
-<p class="p2"><span class="Apple-converted-space">            </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>setUserTimeZone(tz);</p>
-<p class="p2"><span class="Apple-converted-space">            </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>return () =&gt; clearInterval(timer);</p>
-<p class="p1"><span class="Apple-converted-space">          </span>}, []);</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">          </span>const timeZones = [</p>
-<p class="p1"><span class="Apple-converted-space">            </span>{<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">              </span>name: 'AET (Australian Eastern Time)',</p>
-<p class="p1"><span class="Apple-converted-space">              </span>abbr: 'AET',</p>
-<p class="p1"><span class="Apple-converted-space">              </span>standard: { label: 'AEST', offset: 10 },</p>
-<p class="p1"><span class="Apple-converted-space">              </span>daylight: { label: 'AEDT', offset: 11, start: 'Oct 6, 2024' },</p>
-<p class="p1"><span class="Apple-converted-space">              </span>color: 'bg-amber-500',</p>
-<p class="p1"><span class="Apple-converted-space">              </span>lightColor: 'bg-amber-100',</p>
-<p class="p1"><span class="Apple-converted-space">              </span>borderColor: 'border-amber-500'</p>
-<p class="p1"><span class="Apple-converted-space">            </span>},</p>
-<p class="p1"><span class="Apple-converted-space">            </span>{<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">              </span>name: 'CET (Central European Time)',</p>
-<p class="p1"><span class="Apple-converted-space">              </span>abbr: 'CET',</p>
-<p class="p1"><span class="Apple-converted-space">              </span>standard: { label: 'CET', offset: 1 },</p>
-<p class="p1"><span class="Apple-converted-space">              </span>daylight: { label: 'CEST', offset: 2, start: 'Mar 30, 2025' },</p>
-<p class="p1"><span class="Apple-converted-space">              </span>color: 'bg-blue-500',</p>
-<p class="p1"><span class="Apple-converted-space">              </span>lightColor: 'bg-blue-100',</p>
-<p class="p1"><span class="Apple-converted-space">              </span>borderColor: 'border-blue-500'</p>
-<p class="p1"><span class="Apple-converted-space">            </span>},</p>
-<p class="p1"><span class="Apple-converted-space">            </span>{<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">              </span>name: 'ET (Eastern Time)',</p>
-<p class="p1"><span class="Apple-converted-space">              </span>abbr: 'ET',</p>
-<p class="p1"><span class="Apple-converted-space">              </span>standard: { label: 'EST', offset: -5 },</p>
-<p class="p1"><span class="Apple-converted-space">              </span>daylight: { label: 'EDT', offset: -4, start: 'Mar 9, 2025' },</p>
-<p class="p1"><span class="Apple-converted-space">              </span>color: 'bg-green-500',</p>
-<p class="p1"><span class="Apple-converted-space">              </span>lightColor: 'bg-green-100',</p>
-<p class="p1"><span class="Apple-converted-space">              </span>borderColor: 'border-green-500'</p>
-<p class="p1"><span class="Apple-converted-space">            </span>},</p>
-<p class="p1"><span class="Apple-converted-space">            </span>{<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">              </span>name: 'MT (Mountain Time)',</p>
-<p class="p1"><span class="Apple-converted-space">              </span>abbr: 'MT',</p>
-<p class="p1"><span class="Apple-converted-space">              </span>standard: { label: 'MST', offset: -7 },</p>
-<p class="p1"><span class="Apple-converted-space">              </span>daylight: { label: 'MDT', offset: -6, start: 'Mar 9, 2025' },</p>
-<p class="p1"><span class="Apple-converted-space">              </span>color: 'bg-purple-500',</p>
-<p class="p1"><span class="Apple-converted-space">              </span>lightColor: 'bg-purple-100',</p>
-<p class="p1"><span class="Apple-converted-space">              </span>borderColor: 'border-purple-500'</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}</p>
-<p class="p1"><span class="Apple-converted-space">          </span>];</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">          </span>const isDST = (month) =&gt; month &gt;= 3 &amp;&amp; month &lt; 11;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>const currentMonth = currentTime.getMonth();</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">          </span>const getTimeForZone = (tz, hour) =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const offset = isDST(currentMonth) ? tz.daylight.offset : tz.standard.offset;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>return (hour - offset + 24) % 24;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>};</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">          </span>const getCurrentTimeForZone = (tz) =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const utcHour = currentTime.getUTCHours();</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const utcMinute = currentTime.getUTCMinutes();</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const offset = isDST(currentMonth) ? tz.daylight.offset : tz.standard.offset;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const hour = (utcHour + offset + 24) % 24;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>return `${hour.toString().padStart(2, '0')}:${utcMinute.toString().padStart(2, '0')}`;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>};</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">          </span>const isAcceptableHours = (hour) =&gt; hour &gt;= 6 &amp;&amp; hour &lt; 19;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">          </span>const getOverlapCount = (utcHour) =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>return timeZones.filter(tz =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">              </span>const localHour = getTimeForZone(tz, utcHour);</p>
-<p class="p1"><span class="Apple-converted-space">              </span>return isAcceptableHours(localHour);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}).length;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>};</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">          </span>const hours = Array.from({ length: 24 }, (_, i) =&gt; i);</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">          </span>const userTZ = timeZones.find(tz =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const offset = isDST(currentMonth) ? tz.daylight.offset : tz.standard.offset;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const userOffset = -currentTime.getTimezoneOffset() / 60;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>return offset === userOffset;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>});</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">          </span>const ClockIcon = () =&gt; (</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;svg className="w-8 h-8 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;circle cx="12" cy="12" r="10" strokeWidth="2"/&gt;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;path d="M12 6v6l4 2" strokeWidth="2" strokeLinecap="round"/&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/svg&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>);</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">          </span>const UsersIcon = () =&gt; (</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" strokeWidth="2"/&gt;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;circle cx="9" cy="7" r="4" strokeWidth="2"/&gt;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" strokeWidth="2"/&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/svg&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>);</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">          </span>const MapPinIcon = () =&gt; (</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;svg className="w-4 h-4 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" strokeWidth="2"/&gt;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;circle cx="12" cy="10" r="3" strokeWidth="2"/&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/svg&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>);</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">          </span>const SmallClockIcon = () =&gt; (</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;svg className="w-4 h-4 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;circle cx="12" cy="12" r="10" strokeWidth="2"/&gt;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;path d="M12 6v6l4 2" strokeWidth="2" strokeLinecap="round"/&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/svg&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>);</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">          </span>return (</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div className="w-full max-w-7xl mx-auto p-6 bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl shadow-lg"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;div className="mb-8"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div className="flex items-center gap-3 mb-4"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                  </span>&lt;ClockIcon /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                  </span>&lt;h1 className="text-3xl font-bold text-slate-800"&gt;Global Team Time Zone Overlap&lt;/h1&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
-<p class="p2"><span class="Apple-converted-space">                </span></p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div className="flex flex-wrap gap-4 items-center text-sm"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                  </span>&lt;div className="flex items-center gap-2 bg-white px-4 py-2 rounded-lg shadow-sm"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;MapPinIcon /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span className="text-slate-600"&gt;Your Location:&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span className="font-semibold text-slate-800"&gt;{userTimeZone}&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                  </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                  </span>&lt;div className="flex items-center gap-2 bg-white px-4 py-2 rounded-lg shadow-sm"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;SmallClockIcon /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span className="text-slate-600"&gt;Your Time:&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span className="font-semibold text-slate-800"&gt;{userLocalTime}&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                  </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                  </span>{userTZ &amp;&amp; (</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div className={`flex items-center gap-2 px-4 py-2 rounded-lg shadow-sm ${userTZ.lightColor} ${userTZ.borderColor} border-2`}&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                      </span>&lt;span className="text-slate-700"&gt;You're in: &lt;strong&gt;{userTZ.abbr}&lt;/strong&gt;&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                  </span>)}</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{timeZones.map((tz, idx) =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                  </span>const currentTimeStr = getCurrentTimeForZone(tz);</p>
-<p class="p1"><span class="Apple-converted-space">                  </span>const currentHour = parseInt(currentTimeStr.split(':')[0]);</p>
-<p class="p1"><span class="Apple-converted-space">                  </span>const currentLabel = isDST(currentMonth) ? tz.daylight.label : tz.standard.label;</p>
-<p class="p1"><span class="Apple-converted-space">                  </span>const isAcceptable = isAcceptableHours(currentHour);</p>
-<p class="p1"><span class="Apple-converted-space">                  </span>const isUserZone = userTZ &amp;&amp; userTZ.abbr === tz.abbr;</p>
-<p class="p1"><span class="Apple-converted-space">                  </span>const isDaylightActive = isDST(currentMonth);</p>
-<p class="p2"><span class="Apple-converted-space">                  </span></p>
-<p class="p1"><span class="Apple-converted-space">                  </span>return (</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div key={idx} className={`p-4 rounded-lg border-2 ${tz.borderColor} ${tz.lightColor} ${isUserZone ? 'ring-2 ring-slate-700' : ''} relative`}&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                      </span>{isUserZone &amp;&amp; (</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div className="absolute top-2 right-2 text-xs font-bold text-slate-700 bg-white px-2 py-1 rounded"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                          </span>YOU</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                      </span>)}</p>
-<p class="p1"><span class="Apple-converted-space">                      </span>&lt;div className="text-base font-bold text-slate-800 mb-1"&gt;{tz.name}&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                      </span>&lt;div className="text-xs text-slate-500 mb-2"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>Currently: &lt;strong&gt;{currentLabel}&lt;/strong&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>{!isDaylightActive &amp;&amp; (</p>
-<p class="p1"><span class="Apple-converted-space">                          </span>&lt;div className="mt-1"&gt;DST starts: {tz.daylight.start}&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>)}</p>
-<p class="p1"><span class="Apple-converted-space">                      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                      </span>&lt;div className="text-2xl font-bold text-slate-900"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>{currentTimeStr}</p>
-<p class="p1"><span class="Apple-converted-space">                      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                      </span>&lt;div className={`text-xs mt-1 ${isAcceptable ? 'text-green-600 font-semibold' : 'text-slate-400'}`}&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>{isAcceptable ? '● Acceptable Range' : '○ Outside Range'}</p>
-<p class="p1"><span class="Apple-converted-space">                      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                  </span>);</p>
-<p class="p1"><span class="Apple-converted-space">                </span>})}</p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;div className="bg-white rounded-lg p-6 shadow-md"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;h2 className="text-xl font-bold text-slate-800 mb-2 flex items-center gap-2"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                  </span>&lt;UsersIcon /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                  </span>24-Hour Overlap View</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;p className="text-sm text-slate-600 mb-4"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                  </span>Acceptable meeting times: 6 AM - 7 PM (excludes late evenings and early mornings)</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/p&gt;</p>
-<p class="p2"><span class="Apple-converted-space">                </span></p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div className="space-y-3"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                  </span>{timeZones.map((tz, tzIdx) =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>const isUserZone = userTZ &amp;&amp; userTZ.abbr === tz.abbr;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>return (</p>
-<p class="p1"><span class="Apple-converted-space">                      </span>&lt;div key={tzIdx} className="flex items-center gap-3"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div className={`w-32 text-sm font-semibold flex-shrink-0 ${isUserZone ? 'text-slate-900' : 'text-slate-700'}`}&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                          </span>{tz.abbr}</p>
-<p class="p1"><span class="Apple-converted-space">                          </span>{isUserZone &amp;&amp; &lt;span className="text-xs block text-slate-500"&gt;(You)&lt;/span&gt;}</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div className="flex-1 flex gap-0.5"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                          </span>{hours.map((utcHour) =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>const localHour = getTimeForZone(tz, utcHour);</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>const isAcceptable = isAcceptableHours(localHour);</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>const isCurrent = utcHour === currentTime.getUTCHours();</p>
-<p class="p2"><span class="Apple-converted-space">                            </span></p>
-<p class="p1"><span class="Apple-converted-space">                            </span>return (</p>
-<p class="p1"><span class="Apple-converted-space">                              </span>&lt;div</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>key={utcHour}</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>className={`flex-1 h-10 relative cursor-pointer transition-all ${</p>
-<p class="p1"><span class="Apple-converted-space">                                  </span>isAcceptable ? tz.color : 'bg-slate-200'</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>} ${isCurrent ? 'ring-2 ring-slate-900' : ''} hover:opacity-80`}</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>onMouseEnter={() =&gt; setSelectedHour(utcHour)}</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>onMouseLeave={() =&gt; setSelectedHour(null)}</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>title={`UTC ${utcHour}:00 = ${tz.abbr} ${localHour}:00`}</p>
-<p class="p1"><span class="Apple-converted-space">                              </span>&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>{isCurrent &amp;&amp; (</p>
-<p class="p1"><span class="Apple-converted-space">                                  </span>&lt;div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1 w-0 h-0 border-l-4 border-r-4 border-b-4 border-transparent border-b-slate-900"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>)}</p>
-<p class="p1"><span class="Apple-converted-space">                              </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>);</p>
-<p class="p1"><span class="Apple-converted-space">                          </span>})}</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>);</p>
-<p class="p1"><span class="Apple-converted-space">                  </span>})}</p>
-<p class="p2"><span class="Apple-converted-space">                  </span></p>
-<p class="p1"><span class="Apple-converted-space">                  </span>&lt;div className="flex items-center gap-3 mt-2"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div className="w-32 text-xs text-slate-500 flex-shrink-0"&gt;UTC →&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div className="flex-1 flex gap-0.5"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                      </span>{hours.map((hour) =&gt; (</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div key={hour} className="flex-1 text-center text-xs text-slate-500"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                          </span>{hour % 3 === 0 ? hour : ''}</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                      </span>))}</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                  </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                  </span>&lt;div className="flex items-center gap-3 mt-4 pt-4 border-t border-slate-200"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div className="w-32 text-xs font-bold text-slate-700 flex-shrink-0"&gt;Team Overlap&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div className="flex-1 flex gap-0.5"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                      </span>{hours.map((utcHour) =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>const count = getOverlapCount(utcHour);</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>const opacity = count === 0 ? 0.1 : count / 4;</p>
-<p class="p2"><span class="Apple-converted-space">                        </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>return (</p>
-<p class="p1"><span class="Apple-converted-space">                          </span>&lt;div</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>key={utcHour}</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>className={`flex-1 h-8 flex items-center justify-center text-xs font-bold text-white relative`}</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>style={{<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                              </span>backgroundColor: `rgba(15, 118, 110, ${opacity})`,</p>
-<p class="p1"><span class="Apple-converted-space">                              </span>border: selectedHour === utcHour ? '2px solid #0f766e' : 'none'</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>}}</p>
-<p class="p1"><span class="Apple-converted-space">                          </span>&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>{count &gt; 0 &amp;&amp; count}</p>
-<p class="p1"><span class="Apple-converted-space">                          </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>);</p>
-<p class="p1"><span class="Apple-converted-space">                      </span>})}</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                  </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                </span>{selectedHour !== null &amp;&amp; (</p>
-<p class="p1"><span class="Apple-converted-space">                  </span>&lt;div className="mt-6 p-4 bg-slate-50 rounded-lg border border-slate-200"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div className="font-semibold text-slate-800 mb-2"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                      </span>UTC {selectedHour}:00 - {getOverlapCount(selectedHour)} team member(s) in acceptable range</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                      </span>{timeZones.map((tz, idx) =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>const localHour = getTimeForZone(tz, selectedHour);</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>const isAcceptable = isAcceptableHours(localHour);</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>const isUserZone = userTZ &amp;&amp; userTZ.abbr === tz.abbr;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>return (</p>
-<p class="p1"><span class="Apple-converted-space">                          </span>&lt;div key={idx} className={`p-2 rounded ${isAcceptable ? tz.lightColor : 'bg-slate-100'} ${isUserZone ? 'ring-2 ring-slate-700' : ''}`}&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div className="font-semibold"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                              </span>{tz.abbr}</p>
-<p class="p1"><span class="Apple-converted-space">                              </span>{isUserZone &amp;&amp; &lt;span className="text-xs ml-1"&gt;(You)&lt;/span&gt;}</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;{localHour.toString().padStart(2, '0')}:00&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div className={`text-xs ${isAcceptable ? 'text-green-600' : 'text-slate-400'}`}&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                              </span>{isAcceptable ? '✓ Good time' : '✗ Too early/late'}</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                          </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>);</p>
-<p class="p1"><span class="Apple-converted-space">                      </span>})}</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                  </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>)}</p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;div className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4 text-sm"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{timeZones.map((tz, idx) =&gt; (</p>
-<p class="p1"><span class="Apple-converted-space">                  </span>&lt;div key={idx} className="flex items-center gap-2"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div className={`w-4 h-4 rounded ${tz.color}`}&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span className="text-slate-700"&gt;{tz.name}&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                  </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>))}</p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>};</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>ReactDOM.render(&lt;TimeZoneOverlapVisualizer /&gt;, document.getElementById('root'));</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
-<p class="p1">&lt;/body&gt;</p>
-<p class="p1">&lt;/html&gt;</p>
+    <div id="root"></div>
+    
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        const TimeZoneOverlapVisualizer = () => {
+          const [currentTime, setCurrentTime] = useState(new Date());
+          const [selectedHour, setSelectedHour] = useState(null);
+          const [userTimeZone, setUserTimeZone] = useState('');
+          const [userLocalTime, setUserLocalTime] = useState('');
+
+          useEffect(() => {
+            const timer = setInterval(() => {
+              const now = new Date();
+              setCurrentTime(now);
+              setUserLocalTime(now.toLocaleTimeString('en-US', { 
+                hour: '2-digit', 
+                minute: '2-digit',
+                hour12: false 
+              }));
+            }, 1000);
+            
+            const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            setUserTimeZone(tz);
+            
+            return () => clearInterval(timer);
+          }, []);
+
+          const timeZones = [
+            { 
+              name: 'AET (Australian Eastern Time)',
+              abbr: 'AET',
+              standard: { label: 'AEST', offset: 10 },
+              daylight: { label: 'AEDT', offset: 11, start: 'Oct 6, 2024' },
+              color: 'bg-amber-500',
+              lightColor: 'bg-amber-100',
+              borderColor: 'border-amber-500'
+            },
+            { 
+              name: 'CET (Central European Time)',
+              abbr: 'CET',
+              standard: { label: 'CET', offset: 1 },
+              daylight: { label: 'CEST', offset: 2, start: 'Mar 30, 2025' },
+              color: 'bg-blue-500',
+              lightColor: 'bg-blue-100',
+              borderColor: 'border-blue-500'
+            },
+            { 
+              name: 'ET (Eastern Time)',
+              abbr: 'ET',
+              standard: { label: 'EST', offset: -5 },
+              daylight: { label: 'EDT', offset: -4, start: 'Mar 9, 2025' },
+              color: 'bg-green-500',
+              lightColor: 'bg-green-100',
+              borderColor: 'border-green-500'
+            },
+            { 
+              name: 'MT (Mountain Time)',
+              abbr: 'MT',
+              standard: { label: 'MST', offset: -7 },
+              daylight: { label: 'MDT', offset: -6, start: 'Mar 9, 2025' },
+              color: 'bg-purple-500',
+              lightColor: 'bg-purple-100',
+              borderColor: 'border-purple-500'
+            }
+          ];
+
+          const isDST = (month) => month >= 3 && month < 11;
+          const currentMonth = currentTime.getMonth();
+
+          const getTimeForZone = (tz, hour) => {
+            const offset = isDST(currentMonth) ? tz.daylight.offset : tz.standard.offset;
+            return (hour - offset + 24) % 24;
+          };
+
+          const getCurrentTimeForZone = (tz) => {
+            const utcHour = currentTime.getUTCHours();
+            const utcMinute = currentTime.getUTCMinutes();
+            const offset = isDST(currentMonth) ? tz.daylight.offset : tz.standard.offset;
+            const hour = (utcHour + offset + 24) % 24;
+            return `${hour.toString().padStart(2, '0')}:${utcMinute.toString().padStart(2, '0')}`;
+          };
+
+          const isAcceptableHours = (hour) => hour >= 6 && hour < 19;
+
+          const getOverlapCount = (utcHour) => {
+            return timeZones.filter(tz => {
+              const localHour = getTimeForZone(tz, utcHour);
+              return isAcceptableHours(localHour);
+            }).length;
+          };
+
+          const hours = Array.from({ length: 24 }, (_, i) => i);
+
+          const userTZ = timeZones.find(tz => {
+            const offset = isDST(currentMonth) ? tz.daylight.offset : tz.standard.offset;
+            const userOffset = -currentTime.getTimezoneOffset() / 60;
+            return offset === userOffset;
+          });
+
+          const ClockIcon = () => (
+            <svg className="w-8 h-8 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10" strokeWidth="2"/>
+              <path d="M12 6v6l4 2" strokeWidth="2" strokeLinecap="round"/>
+            </svg>
+          );
+
+          const UsersIcon = () => (
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" strokeWidth="2"/>
+              <circle cx="9" cy="7" r="4" strokeWidth="2"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" strokeWidth="2"/>
+            </svg>
+          );
+
+          const MapPinIcon = () => (
+            <svg className="w-4 h-4 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" strokeWidth="2"/>
+              <circle cx="12" cy="10" r="3" strokeWidth="2"/>
+            </svg>
+          );
+
+          const SmallClockIcon = () => (
+            <svg className="w-4 h-4 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10" strokeWidth="2"/>
+              <path d="M12 6v6l4 2" strokeWidth="2" strokeLinecap="round"/>
+            </svg>
+          );
+
+          return (
+            <div className="w-full max-w-7xl mx-auto p-6 bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl shadow-lg">
+              <div className="mb-8">
+                <div className="flex items-center gap-3 mb-4">
+                  <ClockIcon />
+                  <h1 className="text-3xl font-bold text-slate-800">Global Team Time Zone Overlap</h1>
+                </div>
+                
+                <div className="flex flex-wrap gap-4 items-center text-sm">
+                  <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-lg shadow-sm">
+                    <MapPinIcon />
+                    <span className="text-slate-600">Your Location:</span>
+                    <span className="font-semibold text-slate-800">{userTimeZone}</span>
+                  </div>
+                  <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-lg shadow-sm">
+                    <SmallClockIcon />
+                    <span className="text-slate-600">Your Time:</span>
+                    <span className="font-semibold text-slate-800">{userLocalTime}</span>
+                  </div>
+                  {userTZ && (
+                    <div className={`flex items-center gap-2 px-4 py-2 rounded-lg shadow-sm ${userTZ.lightColor} ${userTZ.borderColor} border-2`}>
+                      <span className="text-slate-700">You're in: <strong>{userTZ.abbr}</strong></span>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                {timeZones.map((tz, idx) => {
+                  const currentTimeStr = getCurrentTimeForZone(tz);
+                  const currentHour = parseInt(currentTimeStr.split(':')[0]);
+                  const currentLabel = isDST(currentMonth) ? tz.daylight.label : tz.standard.label;
+                  const isAcceptable = isAcceptableHours(currentHour);
+                  const isUserZone = userTZ && userTZ.abbr === tz.abbr;
+                  const isDaylightActive = isDST(currentMonth);
+                  
+                  return (
+                    <div key={idx} className={`p-4 rounded-lg border-2 ${tz.borderColor} ${tz.lightColor} ${isUserZone ? 'ring-2 ring-slate-700' : ''} relative`}>
+                      {isUserZone && (
+                        <div className="absolute top-2 right-2 text-xs font-bold text-slate-700 bg-white px-2 py-1 rounded">
+                          YOU
+                        </div>
+                      )}
+                      <div className="text-base font-bold text-slate-800 mb-1">{tz.name}</div>
+                      <div className="text-xs text-slate-500 mb-2">
+                        Currently: <strong>{currentLabel}</strong>
+                        {!isDaylightActive && (
+                          <div className="mt-1">DST starts: {tz.daylight.start}</div>
+                        )}
+                      </div>
+                      <div className="text-2xl font-bold text-slate-900">
+                        {currentTimeStr}
+                      </div>
+                      <div className={`text-xs mt-1 ${isAcceptable ? 'text-green-600 font-semibold' : 'text-slate-400'}`}>
+                        {isAcceptable ? '● Acceptable Range' : '○ Outside Range'}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              <div className="bg-white rounded-lg p-6 shadow-md">
+                <h2 className="text-xl font-bold text-slate-800 mb-2 flex items-center gap-2">
+                  <UsersIcon />
+                  24-Hour Overlap View
+                </h2>
+                <p className="text-sm text-slate-600 mb-4">
+                  Acceptable meeting times: 6 AM - 7 PM (excludes late evenings and early mornings)
+                </p>
+                
+                <div className="space-y-3">
+                  {timeZones.map((tz, tzIdx) => {
+                    const isUserZone = userTZ && userTZ.abbr === tz.abbr;
+                    return (
+                      <div key={tzIdx} className="flex items-center gap-3">
+                        <div className={`w-32 text-sm font-semibold flex-shrink-0 ${isUserZone ? 'text-slate-900' : 'text-slate-700'}`}>
+                          {tz.abbr}
+                          {isUserZone && <span className="text-xs block text-slate-500">(You)</span>}
+                        </div>
+                        <div className="flex-1 flex gap-0.5">
+                          {hours.map((utcHour) => {
+                            const localHour = getTimeForZone(tz, utcHour);
+                            const isAcceptable = isAcceptableHours(localHour);
+                            const isCurrent = utcHour === currentTime.getUTCHours();
+                            
+                            return (
+                              <div
+                                key={utcHour}
+                                className={`flex-1 h-10 relative cursor-pointer transition-all ${
+                                  isAcceptable ? tz.color : 'bg-slate-200'
+                                } ${isCurrent ? 'ring-2 ring-slate-900' : ''} hover:opacity-80`}
+                                onMouseEnter={() => setSelectedHour(utcHour)}
+                                onMouseLeave={() => setSelectedHour(null)}
+                                title={`UTC ${utcHour}:00 = ${tz.abbr} ${localHour}:00`}
+                              >
+                                {isCurrent && (
+                                  <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1 w-0 h-0 border-l-4 border-r-4 border-b-4 border-transparent border-b-slate-900"></div>
+                                )}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    );
+                  })}
+                  
+                  <div className="flex items-center gap-3 mt-2">
+                    <div className="w-32 text-xs text-slate-500 flex-shrink-0">UTC →</div>
+                    <div className="flex-1 flex gap-0.5">
+                      {hours.map((hour) => (
+                        <div key={hour} className="flex-1 text-center text-xs text-slate-500">
+                          {hour % 3 === 0 ? hour : ''}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-3 mt-4 pt-4 border-t border-slate-200">
+                    <div className="w-32 text-xs font-bold text-slate-700 flex-shrink-0">Team Overlap</div>
+                    <div className="flex-1 flex gap-0.5">
+                      {hours.map((utcHour) => {
+                        const count = getOverlapCount(utcHour);
+                        const opacity = count === 0 ? 0.1 : count / 4;
+                        
+                        return (
+                          <div
+                            key={utcHour}
+                            className={`flex-1 h-8 flex items-center justify-center text-xs font-bold text-white relative`}
+                            style={{ 
+                              backgroundColor: `rgba(15, 118, 110, ${opacity})`,
+                              border: selectedHour === utcHour ? '2px solid #0f766e' : 'none'
+                            }}
+                          >
+                            {count > 0 && count}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+
+                {selectedHour !== null && (
+                  <div className="mt-6 p-4 bg-slate-50 rounded-lg border border-slate-200">
+                    <div className="font-semibold text-slate-800 mb-2">
+                      UTC {selectedHour}:00 - {getOverlapCount(selectedHour)} team member(s) in acceptable range
+                    </div>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm">
+                      {timeZones.map((tz, idx) => {
+                        const localHour = getTimeForZone(tz, selectedHour);
+                        const isAcceptable = isAcceptableHours(localHour);
+                        const isUserZone = userTZ && userTZ.abbr === tz.abbr;
+                        return (
+                          <div key={idx} className={`p-2 rounded ${isAcceptable ? tz.lightColor : 'bg-slate-100'} ${isUserZone ? 'ring-2 ring-slate-700' : ''}`}>
+                            <div className="font-semibold">
+                              {tz.abbr}
+                              {isUserZone && <span className="text-xs ml-1">(You)</span>}
+                            </div>
+                            <div>{localHour.toString().padStart(2, '0')}:00</div>
+                            <div className={`text-xs ${isAcceptable ? 'text-green-600' : 'text-slate-400'}`}>
+                              {isAcceptable ? '✓ Good time' : '✗ Too early/late'}
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              <div className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                {timeZones.map((tz, idx) => (
+                  <div key={idx} className="flex items-center gap-2">
+                    <div className={`w-4 h-4 rounded ${tz.color}`}></div>
+                    <span className="text-slate-700">{tz.name}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          );
+        };
+
+        ReactDOM.render(<TimeZoneOverlapVisualizer />, document.getElementById('root'));
+    </script>
 </body>
 </html>
